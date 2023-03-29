@@ -11,11 +11,11 @@ RUN apt update
 RUN apt install -y curl nano
 
 # Download elasticsearch
-RUN curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.3.1.tar.gz
-RUN tar -xvf elasticsearch-6.3.1.tar.gz
+RUN curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.8.23.tar.gz
+RUN tar -xvf elasticsearch-6.8.23.tar.gz
 
 # Add config
-ADD elasticsearch.yml /usr/elasticsearch-6.3.1/config/elasticsearch.yml
+ADD elasticsearch.yml /usr/elasticsearch-6.8.23/config/elasticsearch.yml
 
 RUN chown -R elasticuser: .
 USER elasticuser
@@ -25,8 +25,8 @@ ENV discovery.type=single-node
 ENV xpack.security.enabled: false
 ENV xpack.ml.enabled: false
 
-RUN cd elasticsearch-6.3.1/bin
-RUN chown -R elasticuser: elasticsearch-6.3.1
+RUN cd elasticsearch-6.8.23/bin
+RUN chown -R elasticuser: elasticsearch-6.8.23
 
 EXPOSE 9200 9300
-CMD cd /usr/elasticsearch-6.3.1/bin/ && ./elasticsearch
+CMD cd /usr/elasticsearch-6.8.23/bin/ && ./elasticsearch
